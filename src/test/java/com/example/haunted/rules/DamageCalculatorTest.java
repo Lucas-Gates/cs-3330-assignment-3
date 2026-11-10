@@ -29,7 +29,13 @@ class DamageCalculatorTest{
 	List<Item> monsterLoot = new ArrayList<>();
 	testmonster = new Monster("hotdog monster" , 100, 25, 20, monsterLoot);
 	}
-	
+
+	//handling bad inputs 
+	@Test
+	void ShouldThrowExceptionWhenCalcReceivesNull(){
+		assertThrows(IllegalArgumentException.class, () -> tesetcalc.CalculatePlayerDamage(null, testmonster));
+		assertThrows(IllegalArgumentException.class, () -> tesetcalc.CalculatePlayerDamage(testplayer,null));
+	}
 	
 	@Test
 	public void shouldRejectPlayerCalc() {
@@ -38,8 +44,9 @@ class DamageCalculatorTest{
 		
 		//assert 
 		assertEquals(-1, testresult);
-		
 	}
+
+	// add happypath and boundry analysis
 	
 	
 	
