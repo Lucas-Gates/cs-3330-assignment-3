@@ -99,7 +99,7 @@ public class CombatEngineTest {
                 "Recover the Lost Gradebook and defeat the Final Exam Phantom.");
 		Item potion = new Potion("Coffee Potion", "A backup coffee drop.", 15);
 		Monster monster = new Monster("Sleep-Deprived TA", 0, 6, 1,
-                List.of(new Potion(potion));
+                List.of(potion));
 		
 		// Act
 		CombatResult result = engine.attack(player, quest, monster);
