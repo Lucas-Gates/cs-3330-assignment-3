@@ -33,14 +33,13 @@ class DamageCalculatorTest{
 	//handling bad inputs 
 	@Test
 	void ShouldThrowExceptionWhenCalcReceivesNull(){
-		assertThrows(IllegalArgumentException.class, () -> testcalc.calculatePlayerDamage(null, testmonster));
-		assertThrows(IllegalArgumentException.class, () -> testcalc.calculatePlayerDamage(testplayer,null));
+		assertThrows(NullPointerException.class, () -> testcalc.calculatePlayerDamage(null, testmonster));
+		assertThrows(NullPointerException.class, () -> testcalc.calculatePlayerDamage(testplayer,null));
 	}
 	
 	// happypath tests
-	
-	//standard player attack, should return true
 
+	//standard player attack, should return true
 	@Test 
 	public void shouldCalculateStandardPlayerDamage() {
 		// player attack = 35 and monster defense = 20, 35-20 = 15
@@ -59,6 +58,7 @@ class DamageCalculatorTest{
 		assertEquals(5, damage);
 	}
 	// boss monster attack 
+	@Test
 	public void shouldCalculateBossMonsterDamageUsingCurrentAttack() {
 		BossMonster boss = new BossMonster("Mega Hotdog", 200, 40, 20, new ArrayList<>(), 15);
 		int damage = testcalc.calculateMonsterDamage(boss, testplayer);
@@ -67,6 +67,7 @@ class DamageCalculatorTest{
 	}
 	
 	// tie 
+	@Test
 	public void shouldReturnOneWhenAttackEqualsDefense() {
 		Player evenPlayer = new Player("laila", 100, 20, 20, new Inventory(50));
         int damage = testcalc.calculatePlayerDamage(evenPlayer, testmonster);
