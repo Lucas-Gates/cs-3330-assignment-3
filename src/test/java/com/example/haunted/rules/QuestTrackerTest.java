@@ -5,10 +5,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.*;
 import  com.example.haunted.model.*;
 
-class QuesttrackerTest {
+class QuestTrackerTest {
 	//setting up varibles 
 	private Quest testquest;
-	private QuestItem questitemtest;
 	private Item testitem;
 	private QuestTracker testquesttracker;
 
@@ -19,7 +18,6 @@ class QuesttrackerTest {
 		testquesttracker = new QuestTracker();
 		// making new quest, questitem, and item
 		testquest = new Quest("test quest", " test decription of quest");
-		questitemtest = new QuestItem("quest item test" , "decription of quest item");
 		//item is protected in its file, declare as key 
 		testitem = new Key("test item name", "test description");
 		}
@@ -29,8 +27,11 @@ class QuesttrackerTest {
 		assertDoesNotThrow(() -> testquesttracker.updateQuestForItem(testquest, null));
 	    assertDoesNotThrow(() -> testquesttracker.updateQuestForMonster(testquest, null));
 	    
+	    
 	    Item gradebook = new QuestItem("lost gradebook", "decription");
 	    assertThrows(NullPointerException.class, () -> testquesttracker.updateQuestForItem(null, gradebook));
+	    
+	  
 	}
 	
 	//happy path tests
@@ -70,13 +71,13 @@ class QuesttrackerTest {
 	
 	@Test
 	public void shouldRecognizeFinalExamPhantomIgnoringCase() {
-		Monster caseMonster = new Monster("cAse MonStEr", 100, 20, 20, new ArrayList<>());
-		caseMonster.takeDamage(100);
-	    testquesttracker.updateQuestForMonster(testquest, caseMonster);
+		Monster finalExamPhantom = new Monster("fiNaL ExaM PhaNtOM", 100, 20, 20, new ArrayList<>());
+		finalExamPhantom.takeDamage(100);
+	    testquesttracker.updateQuestForMonster(testquest, finalExamPhantom);
 	    
 	    assertTrue(testquest.isPhantomDefeated());
 	}
-	
+
 	// monster alive vs monster dead boundry 
 	@Test
 	public void shouldNotMarkPhantomDefeatedWhileMonsterIsStillAlive() {
