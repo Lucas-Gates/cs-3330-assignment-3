@@ -16,6 +16,7 @@ class RoomTest {
         room = new Room("study_lounge", "Quiet Study Lounge", "Couches and whiteboards.");
     }
 
+    //should contruct correctly 
     @Test
     void shouldStoreBasicProperties() {
         assertEquals("study_lounge", room.getId());
@@ -28,6 +29,7 @@ class RoomTest {
         assertTrue(room.getMonsters().isEmpty());
     }
 
+    //fail fast !!!
     @Test
     void shouldThrowExceptionWhenConstructorReceivesNull() {
         assertThrows(NullPointerException.class, () -> new Room(null, "Room A", "Desc"));
@@ -35,6 +37,7 @@ class RoomTest {
         assertThrows(NullPointerException.class, () -> new Room("id_a", "Room A", null));
     }
 
+    //map should be cohesive
     @ParameterizedTest
     @EnumSource(Direction.class)
     void shouldConnectExitsInAllDirections(Direction dir) {
@@ -46,6 +49,7 @@ class RoomTest {
         assertSame(adjacent, exits.get(dir));
     }
 
+    //don't go into a null room
     @Test
     void shouldThrowExceptionWhenConnectingNullDirectionOrRoom() {
         Room other = new Room("other", "Other", "Desc");
@@ -53,6 +57,7 @@ class RoomTest {
         assertThrows(NullPointerException.class, () -> room.connect(Direction.NORTH, null));
     }
 
+    //can't put a room after an exit
     @Test
     void shouldReturnUnmodifiableExitsMap() {
         Map<Direction, Room> exits = room.getExits();
@@ -60,6 +65,7 @@ class RoomTest {
         assertThrows(UnsupportedOperationException.class, () -> exits.put(Direction.NORTH, extra));
     }
 
+    //case should not be an issue
     @Test
     void shouldManageItemsWithCaseInsensitiveLookupAndRemoval() {
         Key key = new Key("Desk Key", "Small silver key");
@@ -81,11 +87,13 @@ class RoomTest {
         assertTrue(room.findItem("Desk Key").isEmpty());
     }
 
+    //can't have a null item
     @Test
     void shouldThrowExceptionWhenAddingNullItem() {
         assertThrows(NullPointerException.class, () -> room.addItem(null));
     }
 
+    //should remember the monsters that are in the room
     @Test
     void shouldTrackMonstersAndLivingState() {
         assertFalse(room.hasLivingMonsters());
@@ -103,11 +111,13 @@ class RoomTest {
         assertFalse(room.hasLivingMonsters());
     }
 
+    //can't have a null monster
     @Test
     void shouldThrowExceptionWhenAddingNullMonster() {
         assertThrows(NullPointerException.class, () -> room.addMonster(null));
     }
 
+    //keys should work
     @Test
     void shouldHandleRoomLockingAndUnlockingWithKey() {
         assertTrue(room.unlock("Any Key"));
@@ -123,6 +133,7 @@ class RoomTest {
         assertFalse(room.unlock("Office Key"));
     }
 
+    //traps should work
     @Test
     void shouldSetAndGetTrap() {
         Trap trap = new Trap("Spike Trap", TrapType.STEAM, 8, true, true);
