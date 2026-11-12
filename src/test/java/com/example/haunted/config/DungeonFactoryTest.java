@@ -9,9 +9,11 @@ public class DungeonFactoryTest {
 	@Test
 	void testCreateGame() {
 		// Arrange Act
+		// create the things were gonna test
 		GameEngine engine = DungeonFactory.createGame();
 		
 		// Assert
+		// test that some basic things got correctly placed
 		assertNotNull(engine);
 		assertEquals("Student Explorer", engine.getPlayer().getName());
 		assertEquals("Maintenance Stairwell", engine.getPlayer().getCurrentRoom().getName());
