@@ -2,6 +2,9 @@ package com.example.haunted.model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+
 import java.util.ArrayList;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
@@ -14,8 +17,8 @@ class MonsterTest {
     // initialize test conditions
     @BeforeEach
     void setUp() {
-    	 Item testkey = new Key("skeleton key", "opens doors");
-         Monster testmonster = new Monster("hotdog monster", 100, 10, 10, List.of(testkey));
+    	  testkey = new Key("skeleton key", "opens doors");
+          testmonster = new Monster("hotdog monster", 100, 10, 10, List.of(testkey));
     }
 	
 	
@@ -43,10 +46,20 @@ class MonsterTest {
     //ensuring loot list cant be modified 
     @Test
     void shouldReturnUnmodifiableLootList() {
-        assertEquals(1, testMonster.getLoot().size());
-        assertSame(testkey, testMonster.getLoot().get(0));
-        assertThrows(UnsupportedOperationException.class, () -> testMonster.getLoot().add(key));
+        assertEquals(1, testmonster.getLoot().size());
+        assertSame(testkey, testmonster.getLoot().get(0));
+        assertThrows(UnsupportedOperationException.class, () -> testmonster.getLoot().add(testkey));
     }
+    
+    // boundry analsis tests using parametarized tests 
+    @ParameterizedTest
+    @CsvSource({"30, 70, true", "-20, 100, true", "100, 0, false", "150, 0, false"})
+    void shouldTakeDamageAndTrackAliveState(int damage, int expectedHealth, boolean expectedAlive) {
+    	testmonster.takeDamage(damage);
+        assertEquals(expectedHealth, testmonster.getHealth());
+        assertEquals(expectedAlive, testmonster.isAlive());
+    }
+
 
     
 
