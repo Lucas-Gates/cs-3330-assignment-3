@@ -4,8 +4,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-
-import java.util.ArrayList;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -51,7 +49,7 @@ class MonsterTest {
         assertThrows(UnsupportedOperationException.class, () -> testmonster.getLoot().add(testkey));
     }
     
-    // boundry analsis tests using parametarized tests 
+    // boundry analysis tests using parametarized tests 
     @ParameterizedTest
     @CsvSource({"30, 70, true", "-20, 100, true", "100, 0, false", "150, 0, false"})
     void shouldTakeDamageAndTrackAliveState(int damage, int expectedHealth, boolean expectedAlive) {
