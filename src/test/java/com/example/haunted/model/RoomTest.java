@@ -11,6 +11,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class RoomTest {
     private Room room;
+
+    //setting up the room before each test
     @BeforeEach
     void setUp() {
         room = new Room("study_lounge", "Quiet Study Lounge", "Couches and whiteboards.");
