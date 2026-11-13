@@ -1,9 +1,7 @@
 package com.example.haunted.events;
-import com.example.haunted.model.*;
-import com.example.haunted.events.*;
 import org.junit.jupiter.api.*;
-import java.util.*;
 import static org.junit.jupiter.api.Assertions.*;
+
 
 class InteractionResultTest {
 	private InteractionResult testinteractionresult;
@@ -24,7 +22,7 @@ class InteractionResultTest {
 	
 	//happy test, ensure all inputs(from parameters) are valid 
 	@Test 
-	void shouldStoreAllInteractioResults() {
+	void shouldStoreAllInteractionResults() {
 		assertTrue(testinteractionresult.isSuccess());
 		assertEquals("test message", testinteractionresult.getMessage());
 	}

@@ -1,6 +1,5 @@
 package com.example.haunted.events;
 import com.example.haunted.model.*;
-import com.example.haunted.events.*;
 import org.junit.jupiter.api.*;
 import java.util.*;
 import static org.junit.jupiter.api.Assertions.*;
